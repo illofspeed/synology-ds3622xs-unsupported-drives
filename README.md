@@ -35,6 +35,24 @@ for whitelisting, and adds the missing operational pieces this specific job need
 
 ---
 
+## Is this your problem? (symptoms this repo fixes)
+
+If you've hit any of these on a Synology NAS with third-party drives, you're in the
+right place:
+
+- **"The system failed to mount an SSD read-write cache"** when creating an SSD cache
+  on non-Synology M.2 NVMe drives.
+- Storage Manager only offers a **read-only cache** (or no cache at all) with
+  third-party NVMe SSDs, or the M.2 drives show as **not supported / incompatible**.
+- Drives listed as **"Unverified"** or *"incompatible drive"* /
+  *"not on the compatibility list"* warnings after installing non-Synology HDDs or SSDs.
+- NVMe block devices stuck **read-only** (`blockdev --getro` returns `1`;
+  `sfdisk: Operation not permitted` in `/var/log/space_operation.log`).
+- `smartctl` failing on newer NVMe with **`NVMe Status 0x4002`**.
+- Wanting the whitelist to **survive DSM updates** without manual re-runs.
+
+---
+
 > 📋 Prefer a bare copy-paste runbook with PC/NAS/UI context tags? See [`INSTALL.md`](INSTALL.md).
 > 🧠 Full project history, decisions, and current state: [`docs/PROJECT-CONTEXT.md`](docs/PROJECT-CONTEXT.md) · New dev machine: [`docs/DEV-SETUP.md`](docs/DEV-SETUP.md)
 
