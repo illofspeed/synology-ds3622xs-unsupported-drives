@@ -1,0 +1,18 @@
+This project orchestrates and documents the use of a third-party tool:
+
+  Synology_HDD_db
+  Copyright (c) 007revad
+  https://github.com/007revad/Synology_HDD_db
+
+The whitelisting/compatibility-database work is done entirely by that project.
+This repository does not vendor or modify its source; setup.sh downloads a
+pinned release at install time. All credit for the disk-compatibility engine
+goes to 007revad and contributors. Please refer to that project's repository
+for its own license terms before redistributing its script.
+
+The scripts and documentation original to THIS repository (README.md, setup.sh,
+m2-cache.sh) are licensed under the MIT License — see LICENSE.
+
+"Synology", "DSM", and Synology model names (e.g. DS3622xs+) are trademarks of
+Synology Inc. This project is an independent community effort and is not
+affiliated with, endorsed by, or supported by Synology Inc.

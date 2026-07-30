@@ -1,0 +1,6 @@
+# Local copy fetched at install time on the NAS
+syno_hdd_db.sh
+*.bak
+
+# Local Claude Code harness settings
+.claude/
