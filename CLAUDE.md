@@ -25,9 +25,10 @@ NAS state before advising on anything non-trivial.**
    before a clean reboot.
 4. The cache **persists across reboots once created** — DSM only locks
    *unassigned* third-party M.2. No boot-time hacks needed.
-5. Known-cosmetic, do not "fix": upstream `ERROR 5 Failed to backup` (empty cp
-   path), the unconditional "may need to reboot" line, DSM's bundled smartctl
-   failing with NVMe status 0x4002 (use `synonvme --smart-info-get` instead).
+5. Known-cosmetic, do not "fix": the unconditional "may need to reboot" line,
+   DSM's bundled smartctl failing with NVMe status 0x4002 (use
+   `synonvme --smart-info-get` instead). (`ERROR 5 Failed to backup` was fixed
+   upstream in v3.6.134; ANSI colours handled by `--email` + upstream ≥ v3.6.135.)
 6. Owner **declined** (don't re-suggest): splitting M.2 drives into cache+volume
    (unsupported hack), and 007revad's Synology_enable_Deduplication for the
    "Storage efficiency requires Synology HDDs" gate (too invasive — patches libs).

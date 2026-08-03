@@ -156,10 +156,11 @@ NVMe devices are auto-detected from `/sys/block/nvme*`.
 - **`smartctl` says `Read NVMe Identify Controller failed: NVMe Status 0x4002`** → DSM's bundled
   smartctl 6.5 is too old for these drives. Use `synonvme --smart-info-get /dev/nvmeXn1` or
   `nvme smart-log` instead.
-- **`cp: cannot stat '' … ERROR 5 Failed to backup`** and **ANSI color codes** in Task Scheduler
-  output → harmless cosmetic quirks of the upstream script. Strip colors with
-  `| sed 's/\x1b\[[0-9;]*m//g'`. There is no run that comes out "spotless"; a healthy steady-state
-  run shows all **"already exists / already enabled"**.
+- **`cp: cannot stat '' … ERROR 5 Failed to backup`** → harmless, and fixed upstream in
+  syno_hdd_db **v3.6.134** (this repo pins ≥ that; you'll only see it on older versions).
+  **ANSI color codes** in Task Scheduler output → pass `--email` (setup.sh does), and
+  upstream ≥ v3.6.135 auto-detects scheduler runs. A healthy steady-state run shows all
+  **"already exists / already enabled"**.
 - **Heat** → enterprise NVMe (e.g. Micron 7450) run hot on a passive M.2 card. Set
   **Control Panel → Hardware & Power → Fan Speed Mode → Cool Mode** and add a heatsink. Check
   temps with `synonvme --smart-info-get /dev/nvme0n1`.

@@ -16,7 +16,7 @@ the SSH port `<ssh-port>`, and namespaces with your own.
 Lets you create the HDD pool with no "unverified drive" nags. Skip if you don't mind the warnings.
 ```bash
 sudo curl -fL -o /tmp/hdd.sh \
-  https://raw.githubusercontent.com/007revad/Synology_HDD_db/v3.6.132/syno_hdd_db.sh
+  https://raw.githubusercontent.com/007revad/Synology_HDD_db/v3.6.137/syno_hdd_db.sh
 sudo bash /tmp/hdd.sh --noupdate --wdda --ram     # MUST be bash, not sh
 ```
 
@@ -45,8 +45,9 @@ chmod 755 /volume1/scripts/*.sh
 /volume1/scripts/setup.sh                     # NO --force (omitted by design)
 reboot
 ```
-A healthy run shows mostly **"already exists / already enabled"** plus a harmless
-`ERROR 5 Failed to backup` line. The reboot lets DSM re-classify the M.2 as `support`.
+A healthy run shows mostly **"already exists / already enabled"**. (On syno_hdd_db
+older than v3.6.134 you may also see a harmless `ERROR 5 Failed to backup` line.)
+The reboot lets DSM re-classify the M.2 as `support`.
 
 ## 6. 🐧 Verify the M.2 are ready
 ```bash

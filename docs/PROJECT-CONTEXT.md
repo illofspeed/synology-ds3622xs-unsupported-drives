@@ -26,7 +26,7 @@ Personal values are placeholders — substitute your own (`<nas-ip>`, `<ssh-port
   (`ds3622xs+_host_v7.db`, `ds3622xs+_e10m20-t1_v7.db`, plus `rule_v2_*` action
   rules). JSON key `disk_compatbility_info` (Synology's typo) → model → firmware/default →
   `compatibility_interval[].compatibility: "support"`.
-- 007revad's `syno_hdd_db.sh` (pinned **v3.6.132**) injects detected drive models
+- 007revad's `syno_hdd_db.sh` (pinned **v3.6.137**) injects detected drive models
   into those DBs, and with `--noupdate` freezes DSM's DB auto-update by prefixing
   the SynoOnlinePack version with `9999` (visible as `SynoOnlinePack_v2 version 9999...`).
 - `--wdda` disables WD Drive Analytics; `--ram` clears the third-party RAM warning
@@ -82,7 +82,8 @@ Chronology of root-causing, so nobody re-derives it:
 
 ## 5. Known cosmetic noise (ignore, don't "fix")
 
-- `cp: cannot stat '' … ERROR 5 Failed to backup !` — upstream quirk, actions still applied.
+- `cp: cannot stat '' … ERROR 5 Failed to backup !` — upstream quirk, fixed in
+  v3.6.134 (per 007revad, 2026-08); only seen on older pinned versions.
 - `You may need to reboot the Synology…` — printed unconditionally.
 - DSM's bundled smartctl 6.5 fails on these NVMe (`NVMe Status 0x4002`) —
   use `synonvme --smart-info-get /dev/nvmeXn1` or `nvme smart-log`.
@@ -124,3 +125,7 @@ Chronology of root-causing, so nobody re-derives it:
       resync finish; parallel streams; jumbo frames; expect disk-bound ~1–2.5 days).
 - [ ] Monitor NVMe temps under sustained write load after cooling changes.
 - [ ] Occasionally review + bump the pinned `HDD_DB_VERSION` in `setup.sh`.
+      (Last bump: v3.6.132 → v3.6.137 on 2026-08-03 — picks up the ERROR-5 fix
+      (v3.6.134), scheduler auto-detect (v3.6.135), and an E10M20-T1 db-file fix
+      (v3.6.137). setup.sh now auto-refreshes the NAS copy when the pin changes;
+      the NAS still needs the new setup.sh itself copied over once.)
