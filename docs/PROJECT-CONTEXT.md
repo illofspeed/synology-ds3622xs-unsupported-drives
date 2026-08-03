@@ -11,7 +11,8 @@ Personal values are placeholders — substitute your own (`<nas-ip>`, `<ssh-port
 | Item | Value |
 |---|---|
 | NAS | Synology **DS3622xs+**, DSM **7.4-90075**, 16 GB RAM |
-| HDDs | 8× WDC **WUH721818ALE6L0/L1** (WD Ultrastar 18 TB, third-party) + 1× Synology **HAT5310-20T** |
+| HDDs | 8× WDC **WUH721818ALE6L0/L1/L4** (WD Ultrastar 18 TB, third-party) + 1× Synology **HAT5310-20T** |
+| Expansion unit | **DX1222** attached — syno_hdd_db detects it and mirrors drive entries into `dx1222_v7.db` |
 | Pool/Volume | Storage Pool 1 = **RAID 6**, ~98 TB; Volume 1 = btrfs, **LUKS-encrypted** (`cryptvol_1`) |
 | M.2 | 2× **SAMSUNG MZ1LB3T8HMLA-00007** (PM983 3.84 TB) on an **E10M20-T1** adapter card, PCI slot 1 (earlier: 2× Micron 7450 960 GB, since swapped out) |
 | SSD cache | **Read-write**, RAID 1 (`md3` over `nvme0n1p1`+`nvme1n1p1`), "Pin all Btrfs metadata" enabled; ~98% hit rate |
@@ -127,5 +128,8 @@ Chronology of root-causing, so nobody re-derives it:
 - [ ] Occasionally review + bump the pinned `HDD_DB_VERSION` in `setup.sh`.
       (Last bump: v3.6.132 → v3.6.137 on 2026-08-03 — picks up the ERROR-5 fix
       (v3.6.134), scheduler auto-detect (v3.6.135), and an E10M20-T1 db-file fix
-      (v3.6.137). setup.sh now auto-refreshes the NAS copy when the pin changes;
-      the NAS still needs the new setup.sh itself copied over once.)
+      (v3.6.137). setup.sh now auto-refreshes the NAS copy when the pin changes.
+      Validated on the NAS same day: auto-refresh 132→137 worked, no ERROR 5,
+      colour-free output, `verify` OK, second run correctly skipped the download.
+      One-time change seen: newer --ram also disables memory compatibility —
+      expected, idempotent.)
