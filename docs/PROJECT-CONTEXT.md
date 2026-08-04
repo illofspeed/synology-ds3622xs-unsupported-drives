@@ -19,7 +19,7 @@ Personal values are placeholders — substitute your own (`<nas-ip>`, `<ssh-port
 | NAS SSH | custom port (not 22); user-level login + `sudo -i` |
 | Scripts on NAS | `/volume1/scripts/{setup.sh, m2-cache.sh, syno_hdd_db.sh}` |
 | Scheduler tasks (user root) | Boot-up → `/volume1/scripts/setup.sh`; Daily 04:00 → `/volume1/scripts/setup.sh` |
-| Old NAS | DS1821+ with ~60 TB to migrate later (over 10GbE; disk-bound, plan 1–2.5 days; drive-swap migration impossible across platforms) |
+| Old NAS | DS1821+ — ~60 TB migrated to the DS3622xs+ and unit decommissioned (as of 2026-08) |
 
 ## 2. What the whitelist does (mechanism)
 
@@ -122,8 +122,7 @@ Chronology of root-causing, so nobody re-derives it:
 
 - [ ] Make the GitHub repo public — disclaimer done (2026-07-18); owner still
       needs to set the description/topics in GitHub UI and flip visibility.
-- [ ] Migrate ~60 TB from the DS1821+ (Snapshot Replication or rsync; let RAID
-      resync finish; parallel streams; jumbo frames; expect disk-bound ~1–2.5 days).
+- [x] Migrate ~60 TB from the DS1821+ — done; DS1821+ decommissioned (2026-08).
 - [ ] Monitor NVMe temps under sustained write load after cooling changes.
 - [ ] Occasionally review + bump the pinned `HDD_DB_VERSION` in `setup.sh`.
       (Last bump: v3.6.132 → v3.6.137 on 2026-08-03 — picks up the ERROR-5 fix
