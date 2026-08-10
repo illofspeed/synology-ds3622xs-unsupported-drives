@@ -21,6 +21,29 @@ E10M20-T1 carrying two enterprise NVMe SSDs in a DS3622xs+.
 | Custom lead | Female-to-female lead assembled from two donor leads |
 | Fan-speed adapter | Noctua intermediate Low-Noise Adapter; not the lowest-speed option |
 
+![Top-down view of the Noctua NF-A12x15 FLX installed over the E10M20-T1 heatsinks](../images/e10m20-t1-cooling/noctua-over-e10m20-t1.jpeg)
+
+*Installed cooling arrangement with the DS3622xs+ side/top access open. The slim
+120 mm fan lies horizontally over the E10M20-T1 heatsink area. The cable bundle
+and power adapters are routed along the fan's left side.*
+
+## What the installation photo confirms
+
+- The NF-A12x15 FLX is installed **flat/horizontally**, directly over the black
+  finned E10M20-T1 heatsinks rather than on the rear chassis panel.
+- At least two black cable ties are visible through the fan's left-side mounting
+  holes. They secure the fan and keep the adjacent harness away from the blades.
+- The unobstructed blade/intake face appears to face upward, so the pictured
+  orientation appears to direct air downward onto the heatsinks. This airflow
+  direction is an inference from normal axial-fan construction and should be
+  confirmed from the fan-frame arrows during installation.
+- The white P4/Molex connectors, the black inline Noctua adapter, and the bundled
+  power wiring are visible. The custom splice and its pinout are not exposed
+  clearly enough in this overview photo to copy safely.
+- The overview demonstrates the useful fan position, but separate close-ups are
+  still needed for every mounting anchor, the female-to-female lead, its wire
+  joints, and the final 3-pin output polarity.
+
 ## Why add a fan?
 
 During normal NAS use, the two PM983 SSDs operated acceptably. Sustained
@@ -54,8 +77,10 @@ these principles:
    chassis fans or creates a dead zone around the CPU, memory, or drives.
 3. **Keep safe clearance.** Check both faces of the fan, the blades, the E10M20-T1,
    memory, motherboard, chassis panels, and every cable before closing the NAS.
-4. **Mount it securely and non-conductively.** The fan must not move during
-   transport or vibration, and no fastener should contact PCB traces or components.
+4. **Mount it securely and non-conductively.** In the photographed installation,
+   the fan is laid flat over the heatsink area and black cable ties pass through
+   its mounting holes. The fan must not move during transport or vibration, and no
+   tie or other fastener should contact PCB traces or components.
 5. **Route the cable away from blades and hot components.** Secure enough slack for
    servicing, but do not leave a loop that can enter a fan.
 6. **Verify the complete 12 V power path.** The NF-A12x15 FLX is a 3-pin, 12 V
@@ -66,10 +91,11 @@ these principles:
    reliably, does not rub, and does not trigger fan or power warnings before
    returning the NAS to service.
 
-The fan mounting method still needs to be documented with photos. The first donor
-lead was supplied as an account-private Allegro purchase link, so its exact product
-name and a public product URL must also be added before another person attempts to
-reproduce the harness.
+The overview photo now documents the fan's position and visible cable-tie mounting.
+The first donor lead was supplied as an account-private Allegro purchase link, so
+its exact product name and a public product URL must still be added before another
+person attempts to reproduce the harness. Close-up photos of the hidden mounting
+anchors and custom wire joints are also still required for a reproducible build.
 
 ## Fan power adapter chain
 
@@ -126,7 +152,9 @@ lower limits still.
 3. Shut the NAS down normally and disconnect all cables.
 4. Remove the relevant chassis panel using the normal DS3622xs+ access procedure.
 5. Inspect the E10M20-T1, its heatsinks, nearby cables, and available fan clearance.
-6. Position the Noctua NF-A12x15 FLX so its airflow crosses both M.2 heatsinks.
+6. Lay the Noctua NF-A12x15 FLX horizontally over the E10M20-T1 heatsink area as
+   shown in the installation photo. Confirm the frame's airflow arrows point
+   toward the heatsinks before securing it.
 7. Assemble and continuity-test the custom female-to-female lead and Akyga adapter
    chain outside the NAS. Confirm the expected 12 V polarity at the final 3-pin
    output before connecting the fan.
@@ -182,17 +210,17 @@ SSD or card from a running system.
 
 ## Photo checklist
 
-A final photo set should show:
+A useful overview photo is now included. Additional close-ups should show:
 
-1. the E10M20-T1 and both PM983 SSD locations;
-2. the Noctua model label;
-3. the fan's position and airflow direction;
-4. the mounting points;
-5. cable routing and the actual power connection;
-6. both sides and pinout of the custom female-to-female lead;
-7. the AK-CA-12 → AK-CA-35 → 3-pin adapter chain;
-8. the chosen Noctua Low-Noise Adapter;
-9. insulation and strain relief at every modified connection;
+1. the E10M20-T1 and both PM983 SSD locations with the fan lifted;
+2. the Noctua model label and the airflow-direction arrows on its frame;
+3. every cable-tie mounting and anchor point;
+4. both sides and pinout of the custom female-to-female lead;
+5. the donor-lead product label or packaging;
+6. the AK-CA-12 → AK-CA-35 → 3-pin adapter chain separated for identification;
+7. the chosen Noctua Low-Noise Adapter;
+8. insulation and strain relief at every modified connection;
+9. blade clearance around the adjacent wiring;
 10. clearance with the chassis panel installed.
 
 ## Limits of this result
