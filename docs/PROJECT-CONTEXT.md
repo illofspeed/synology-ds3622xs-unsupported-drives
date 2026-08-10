@@ -10,11 +10,13 @@ Personal values are placeholders — substitute your own (`<nas-ip>`, `<ssh-port
 
 | Item | Value |
 |---|---|
-| NAS | Synology **DS3622xs+**, DSM **7.4-90075**, 16 GB RAM |
+| NAS | Synology **DS3622xs+**, DSM **7.4-90075** |
+| RAM | **128 GB ECC**: internal 2×32 GB OWC ECC + accessible 2×32 GB Kingston Server Premier `KSM32SED8/32HC`; approximately 20-hour Synology memory test passed |
 | HDDs | 8× WDC **WUH721818ALE6L0/L1/L4** (WD Ultrastar 18 TB, third-party) + 1× Synology **HAT5310-20T** |
 | Expansion unit | **DX1222** attached — syno_hdd_db detects it and mirrors drive entries into `dx1222_v7.db` |
 | Pool/Volume | Storage Pool 1 = **RAID 6**, ~98 TB; Volume 1 = btrfs, **LUKS-encrypted** (`cryptvol_1`) |
-| M.2 | 2× **SAMSUNG MZ1LB3T8HMLA-00007** (PM983 3.84 TB) on an **E10M20-T1** adapter card, PCI slot 1 (earlier: 2× Micron 7450 960 GB, since swapped out) |
+| M.2 | 2× **Samsung PM983 3.84 TB** (`MZ-1LB3T80`; DSM may expose a longer OEM identifier) on an **E10M20-T1** adapter card, PCI slot 1 (earlier: 2× Micron 7450 960 GB, since swapped out) |
+| Additional NVMe cooling | **Noctua NF-A12x15 FLX**, 120×120×15 mm, 3-pin, 12 V, positioned for direct airflow over the E10M20-T1 heatsinks |
 | SSD cache | **Read-write**, RAID 1 (`md3` over `nvme0n1p1`+`nvme1n1p1`), "Pin all Btrfs metadata" enabled; ~98% hit rate |
 | NAS SSH | custom port (not 22); user-level login + `sudo -i` |
 | Scripts on NAS | `/volume1/scripts/{setup.sh, m2-cache.sh, syno_hdd_db.sh}` |
@@ -98,8 +100,11 @@ Chronology of root-causing, so nobody re-derives it:
 - **Recreating the cache** (e.g. after cooling changes): remove cache in
   Storage Manager (writeback flushes safely), then `m2-cache.sh status` →
   `hold-rw` → create in UI → `stop` → `verify`. Re-enable "Pin all Btrfs metadata".
-- **Temps**: enterprise NVMe ran 55–65 °C and had logged critical-temp minutes
-  on the stock passive setup → Fan Speed Mode = Cool Mode + heatsinks; check with
+- **Temps**: enterprise NVMe ran 55–65 °C and had logged critical-temperature
+  minutes on the stock passive setup. Sustained benchmarks with the dual PM983
+  setup could fail from overheating. Fan Speed Mode = Cool Mode, appropriate
+  heatsinks, and a Noctua NF-A12x15 FLX providing direct airflow over the E10M20-T1
+  eliminated the observed benchmark failures. Check with
   `synonvme --smart-info-get /dev/nvme0n1`.
 - **Transfers to NAS**: `scp -O -P <ssh-port> …` (SFTP subsystem off by default);
   strip CRLF after copying from Windows (`sed -i 's/\r$//'`).
@@ -108,10 +113,9 @@ Chronology of root-causing, so nobody re-derives it:
 
 ## 7. Repo / mirror layout
 
-- **Canonical**: GitHub `illofspeed/synology-ds3622xs-unsupported-drives`
-  (private as of 2026-06-25; scrubbed, disclaimer + trademark notice added
-  2026-07-18 — ready to be made public once the owner sets description/topics
-  and flips visibility).
+- **Canonical**: public GitHub repository
+  `illofspeed/synology-ds3622xs-unsupported-drives` (scrubbed; disclaimer and
+  trademark notice included).
 - **Mirror**: self-hosted Gitea (`<gitea-user>/<same-name>`), reached via SSH on the
   Gitea SSH port (2222) at the LAN address — NOT port 22 (that's the host OS sshd)
   and NOT via the HTTPS reverse proxy hostname for SSH.
@@ -120,10 +124,10 @@ Chronology of root-causing, so nobody re-derives it:
 
 ## 8. Open items / backlog
 
-- [ ] Make the GitHub repo public — disclaimer done (2026-07-18); owner still
-      needs to set the description/topics in GitHub UI and flip visibility.
+- [x] Make the GitHub repo public; description and topics are set.
 - [x] Migrate ~60 TB from the DS1821+ — done; DS1821+ decommissioned (2026-08).
 - [ ] Monitor NVMe temps under sustained write load after cooling changes.
+- [ ] Add annotated disassembly and E10M20-T1 cooling photos to the new hardware guides.
 - [ ] Occasionally review + bump the pinned `HDD_DB_VERSION` in `setup.sh`.
       (Last bump: v3.6.132 → v3.6.137 on 2026-08-03 — picks up the ERROR-5 fix
       (v3.6.134), scheduler auto-detect (v3.6.135), and an E10M20-T1 db-file fix
