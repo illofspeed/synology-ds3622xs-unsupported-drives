@@ -16,6 +16,10 @@ E10M20-T1 carrying two enterprise NVMe SSDs in a DS3622xs+.
 | Additional fan | **Noctua NF-A12x15 FLX** |
 | Fan size | **120 × 120 × 15 mm** slim profile |
 | Fan connection | **3-pin, 12 V** |
+| P4/Molex adapter | **Akyga AK-CA-12**, 15 cm |
+| Molex/3-pin adapter | **Akyga AK-CA-35**, 15 cm |
+| Custom lead | Female-to-female lead assembled from two donor leads |
+| Fan-speed adapter | Noctua intermediate Low-Noise Adapter; not the lowest-speed option |
 
 ## Why add a fan?
 
@@ -54,17 +58,65 @@ these principles:
    transport or vibration, and no fastener should contact PCB traces or components.
 5. **Route the cable away from blades and hot components.** Secure enough slack for
    servicing, but do not leave a loop that can enter a fan.
-6. **Use a suitable fan power source.** The NF-A12x15 FLX is a 3-pin, 12 V fan.
-   Do not connect it to an unidentified header or assume every internal connector
-   has the correct voltage/current capacity. Follow the fan and power-source
-   specifications for the actual installation.
+6. **Verify the complete 12 V power path.** The NF-A12x15 FLX is a 3-pin, 12 V
+   fan. Connector shape, gender, or wire colour alone does not prove that polarity
+   and pinout are correct. Check continuity and polarity before attaching the fan
+   or connecting the harness to the NAS.
 7. **Test with the chassis open, then closed.** Verify that the added fan starts
    reliably, does not rub, and does not trigger fan or power warnings before
    returning the NAS to service.
 
-Because the exact mounting hardware and power source have not been recorded in
-this guide, do not infer them from the fan model alone. Add the installation photo
-and those two details before another person attempts to copy the physical setup.
+The fan mounting method still needs to be documented with photos. The first donor
+lead was supplied as an account-private Allegro purchase link, so its exact product
+name and a public product URL must also be added before another person attempts to
+reproduce the harness.
+
+## Fan power adapter chain
+
+The installed fan was not connected directly to an unidentified motherboard fan
+header. Its 3-pin, 12 V supply was assembled from the following parts:
+
+1. **Two donor leads** from the same Allegro product were joined to create a
+   female-to-female lead. The conductors were joined using soldered/secured wire
+   connections and insulated.
+2. [**Akyga AK-CA-12**](https://allegro.pl/oferta/kabel-molex-p4-4-pin-akyga-ak-ca-12-procesor-15cm-11449850255)
+   — a 15 cm adapter with a male peripheral Molex connector and female P4 4-pin
+   connector. The listing specifies 18 AWG conductors and a maximum load of 3 A
+   at 12 V.
+3. [**Akyga AK-CA-35**](https://allegro.pl/oferta/kabel-molex-3-pin-12v-molex-akyga-ak-ca-35-15cm-13669511291)
+   — a 15 cm adapter with a female peripheral Molex input and male Molex
+   passthrough plus a 3-pin, 12 V fan output. The listing specifies 20 AWG
+   conductors and a maximum load of 6 A at 12 V.
+4. The Noctua fan was connected to the resulting 3-pin output.
+5. An included Noctua **Low-Noise Adapter** was used between the power adapter and
+   fan. The installed adapter was the intermediate/middle-speed choice, not the
+   most restrictive lowest-speed option. Running at full speed or selecting a
+   different supplied adapter is a noise/temperature decision for the user.
+
+In simplified form, the intended chain is:
+
+```text
+NAS power connection
+  → custom female-to-female lead
+  → Akyga AK-CA-12 (P4 / Molex)
+  → Akyga AK-CA-35 (Molex / 3-pin 12 V)
+  → optional Noctua Low-Noise Adapter
+  → Noctua NF-A12x15 FLX
+```
+
+> [!DANGER]
+> Do not reproduce this harness from connector names alone. Verify the actual NAS
+> source, every pin, continuity, 12 V polarity, and the absence of shorts with a
+> multimeter before connecting the fan. Insulate every splice individually, add
+> strain relief, keep exposed conductors away from the chassis and PCBs, and ensure
+> the total fan current is below the rating of the source and the weakest adapter.
+> A reversed or shorted custom lead can damage the fan, NAS power supply,
+> motherboard, E10M20-T1, or storage devices.
+
+For this chain, the published 3 A at 12 V rating of the AK-CA-12 is lower than the
+published 6 A rating of the AK-CA-35, so the assembled path must never be treated
+as having the higher adapter's rating. The NAS source and custom lead may impose
+lower limits still.
 
 ## Suggested procedure
 
@@ -75,13 +127,18 @@ and those two details before another person attempts to copy the physical setup.
 4. Remove the relevant chassis panel using the normal DS3622xs+ access procedure.
 5. Inspect the E10M20-T1, its heatsinks, nearby cables, and available fan clearance.
 6. Position the Noctua NF-A12x15 FLX so its airflow crosses both M.2 heatsinks.
-7. Secure the fan, connect it only to a verified suitable power source, and secure
-   its cable away from all fan blades.
-8. Before closing the chassis, power on briefly and confirm correct fan operation,
+7. Assemble and continuity-test the custom female-to-female lead and Akyga adapter
+   chain outside the NAS. Confirm the expected 12 V polarity at the final 3-pin
+   output before connecting the fan.
+8. Connect the fan directly for full speed or use the selected Noctua Low-Noise
+   Adapter. Confirm that the fan starts reliably at the selected speed.
+9. Secure the complete harness and fan cable away from all fan blades, PCB edges,
+   heatsinks, and chassis pinch points.
+10. Before closing the chassis, power on briefly and confirm correct fan operation,
    airflow direction, and clearance. Shut down again before making adjustments.
-9. Reassemble the NAS and confirm that the E10M20-T1, 10GbE interface, both NVMe
+11. Reassemble the NAS and confirm that the E10M20-T1, 10GbE interface, both NVMe
    SSDs, storage pool, and cache appear normally.
-10. Repeat the same sustained workload used for the baseline while watching both
+12. Repeat the same sustained workload used for the baseline while watching both
     SSD temperatures and system logs.
 
 ## Monitoring and validation
@@ -132,7 +189,11 @@ A final photo set should show:
 3. the fan's position and airflow direction;
 4. the mounting points;
 5. cable routing and the actual power connection;
-6. clearance with the chassis panel installed.
+6. both sides and pinout of the custom female-to-female lead;
+7. the AK-CA-12 → AK-CA-35 → 3-pin adapter chain;
+8. the chosen Noctua Low-Noise Adapter;
+9. insulation and strain relief at every modified connection;
+10. clearance with the chassis panel installed.
 
 ## Limits of this result
 
