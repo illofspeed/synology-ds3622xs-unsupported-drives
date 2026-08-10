@@ -40,9 +40,9 @@ and power adapters are routed along the fan's left side.*
 - The white P4/Molex connectors, the black inline Noctua adapter, and the bundled
   power wiring are visible. The custom splice and its pinout are not exposed
   clearly enough in this overview photo to copy safely.
-- The overview demonstrates the useful fan position, but separate close-ups are
-  still needed for every mounting anchor, the female-to-female lead, its wire
-  joints, and the final 3-pin output polarity.
+- This is the only installation photo available. It documents the useful fan
+  position, but it is not a wiring diagram and does not establish the hidden
+  splice, wire joints, connector pinout, or final 3-pin output polarity.
 
 ## Why add a fan?
 
@@ -91,11 +91,13 @@ these principles:
    reliably, does not rub, and does not trigger fan or power warnings before
    returning the NAS to service.
 
-The overview photo now documents the fan's position and visible cable-tie mounting.
-The first donor lead was supplied as an account-private Allegro purchase link, so
-its exact product name and a public product URL must still be added before another
-person attempts to reproduce the harness. Close-up photos of the hidden mounting
-anchors and custom wire joints are also still required for a reproducible build.
+The overview photo documents the fan's position and visible cable-tie mounting.
+The first donor lead was supplied through an account-private Allegro purchase
+link, so its exact product name and a public product URL are unavailable. Treat
+the power-chain description as a record of this installation, not as a complete
+pinout or a directly reproducible wiring plan. Anyone building a similar harness
+must identify compatible connectors and independently verify every wire,
+continuity, voltage, and polarity.
 
 ## Fan power adapter chain
 
@@ -207,21 +209,6 @@ airflow under sustained load.
 If you temporarily remove or recreate the SSD cache while changing the hardware,
 follow the removal and recreation sequence in the root guide. Do not pull a cached
 SSD or card from a running system.
-
-## Photo checklist
-
-A useful overview photo is now included. Additional close-ups should show:
-
-1. the E10M20-T1 and both PM983 SSD locations with the fan lifted;
-2. the Noctua model label and the airflow-direction arrows on its frame;
-3. every cable-tie mounting and anchor point;
-4. both sides and pinout of the custom female-to-female lead;
-5. the donor-lead product label or packaging;
-6. the AK-CA-12 → AK-CA-35 → 3-pin adapter chain separated for identification;
-7. the chosen Noctua Low-Noise Adapter;
-8. insulation and strain relief at every modified connection;
-9. blade clearance around the adjacent wiring;
-10. clearance with the chassis panel installed.
 
 ## Limits of this result
 
