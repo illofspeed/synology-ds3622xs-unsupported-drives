@@ -18,12 +18,35 @@ memory test.
 
 | Physical location | Memory installed | Capacity | Result |
 |---|---|---:|---|
-| Hidden internal/factory slots | **2×32 GB OWC ECC SODIMM** | 64 GB | Boots |
+| Hidden internal/factory slots | **2×32 GB OWC DDR4-2666 ECC SODIMM** | 64 GB | Boots |
 | Accessible expansion slots | **2×32 GB Kingston Server Premier KSM32SED8/32HC ECC SODIMM** | 64 GB | Boots |
 | **Total** | **4×32 GB ECC SODIMM** | **128 GB** | **Detected by DSM; memory test passed** |
 
 The complete Synology memory test with 128 GB installed took approximately
 **20 hours** on this machine and completed successfully.
+
+### OWC kit specifications
+
+| Specification | Value |
+|---|---|
+| Kit capacity | **64 GB (2×32 GB)** |
+| Technology | DDR4 ECC SODIMM |
+| Speed | **PC4-21300 / 2666 MHz** |
+| Timings / organization | **CL19, 2Rx8** |
+| Form factor | **260-pin SODIMM** |
+| Voltage | **1.2 V** |
+| Backward compatibility | 2400 MHz and 2133 MHz |
+| Vendor-listed compatibility | Synology DiskStation DS3622xs+ |
+
+These are the specifications supplied for the OWC kit used in this machine. The
+seller also lists Synology `D4ECSO-2666-16G` and `D4ES01-16G` as compatible part
+references; they are **not** the OWC kit's own part number and should not be used
+to identify the installed 32 GB modules.
+
+The seller describes the kit as "warranty-safe," but that marketing statement
+should not be confused with Synology support for this procedure. Replacing the
+hidden factory DIMMs remains outside Synology's documented DS3622xs+ memory-
+expansion procedure.
 
 ## The important trap
 
@@ -141,8 +164,9 @@ Handle memory only by its edges. Avoid touching contacts or nearby components.
 
 ### 9. Install the OWC internal memory
 
-Install **2×32 GB OWC ECC SODIMM** in the two hidden/internal slots. Ensure each
-module is fully inserted at the correct angle and both retaining clips lock.
+Install the **2×32 GB OWC DDR4-2666 / PC4-21300 CL19 2Rx8 ECC SODIMMs** in the two
+hidden/internal slots. Each module is a 260-pin, 1.2 V SODIMM. Ensure each module
+is fully inserted at the correct angle and both retaining clips lock.
 
 ### 10. Reconnect the motherboard and SATA backplane
 

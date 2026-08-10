@@ -11,7 +11,7 @@ Personal values are placeholders — substitute your own (`<nas-ip>`, `<ssh-port
 | Item | Value |
 |---|---|
 | NAS | Synology **DS3622xs+**, DSM **7.4-90075** |
-| RAM | **128 GB ECC**: internal 2×32 GB OWC ECC + accessible 2×32 GB Kingston Server Premier `KSM32SED8/32HC`; approximately 20-hour Synology memory test passed |
+| RAM | **128 GB ECC**: internal 2×32 GB OWC DDR4-2666 / PC4-21300 CL19 2Rx8 ECC SODIMM (260-pin, 1.2 V) + accessible 2×32 GB Kingston Server Premier `KSM32SED8/32HC`; approximately 20-hour Synology memory test passed |
 | HDDs | 8× WDC **WUH721818ALE6L0/L1/L4** (WD Ultrastar 18 TB, third-party) + 1× Synology **HAT5310-20T** |
 | Expansion unit | **DX1222** attached — syno_hdd_db detects it and mirrors drive entries into `dx1222_v7.db` |
 | Pool/Volume | Storage Pool 1 = **RAID 6**, ~98 TB; Volume 1 = btrfs, **LUKS-encrypted** (`cryptvol_1`) |

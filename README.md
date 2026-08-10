@@ -21,7 +21,7 @@ configuration. Read the warnings in the relevant guide before making changes.
 | Area | Hardware / result |
 |---|---|
 | NAS | Synology DS3622xs+ |
-| Internal RAM slots | **2×32 GB OWC ECC SODIMM** replacing the factory 2×8 GB modules |
+| Internal RAM slots | **2×32 GB OWC DDR4-2666 ECC SODIMM** (PC4-21300, CL19, 2Rx8, 260-pin, 1.2 V) replacing the factory 2×8 GB modules |
 | Accessible expansion RAM slots | **2×32 GB Kingston Server Premier KSM32SED8/32HC ECC SODIMM** |
 | Total memory | **128 GB ECC**, recognized by DSM |
 | Memory validation | Synology memory test passed; approximately **20 hours** |
