@@ -1,8 +1,10 @@
 # Project brief (auto-loaded by Claude Code)
 
-Helper scripts + docs for running **non-Synology HDDs and M.2 NVMe** on a
-**Synology DS3622xs+ (DSM 7.4)**, including a **read-write SSD cache** on
-third-party NVMe. Whitelisting is delegated to the community-maintained
+Owner-tested scripts + guides for taking a **Synology DS3622xs+ (DSM 7.4)**
+beyond its documented configuration: non-Synology HDD/NVMe support, a read-write
+SSD cache, a 128 GB ECC RAM upgrade requiring access to the hidden factory DIMMs,
+and active cooling for dual enterprise NVMe on an E10M20-T1. Whitelisting is
+delegated to the community-maintained
 [007revad/Synology_HDD_db](https://github.com/007revad/Synology_HDD_db)
 (pinned version, run by `setup.sh`); this repo adds ordering, the cache-creation
 trick, and verification.
@@ -37,7 +39,10 @@ NAS state before advising on anything non-trivial.**
 
 - `setup.sh` — downloads pinned syno_hdd_db.sh, applies whitelist (no --force)
 - `m2-cache.sh` — `status | unlock | hold-rw | stop | verify`
-- `README.md` — explained clean path; `INSTALL.md` — copy-paste runbook
+- `README.md` — repository guide index + explained drive/cache path
+- `INSTALL.md` — copy-paste drive/cache runbook
+- `guides/128gb-ram-upgrade.md` — hidden-DIMM access, 128 GB configuration, test
+- `guides/e10m20-t1-cooling.md` — NF-A12x15 airflow over E10M20-T1 + dual PM983
 - `docs/PROJECT-CONTEXT.md` — full session history/state; `docs/DEV-SETUP.md` — new-PC setup
 - `extras/standalone-whitelist.sh` — not recommended, reference only
 

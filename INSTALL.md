@@ -1,7 +1,10 @@
 # INSTALL — copy-paste runbook
 
 The exact sequence, validated end-to-end on a freshly-installed **DS3622xs+ (DSM 7.4)**.
-For the *why* behind each step, see [`README.md`](README.md). Replace `<user>@<nas-ip>`,
+For the *why* behind each step, see the
+[unsupported-drives and NVMe-cache guide](README.md#unsupported-drives--m2-read-write-cache).
+For physical modifications, use the separate [128 GB RAM](guides/128gb-ram-upgrade.md)
+and [E10M20-T1 cooling](guides/e10m20-t1-cooling.md) guides. Replace `<user>@<nas-ip>`,
 the SSH port `<ssh-port>`, and namespaces with your own.
 
 > **Contexts:** 🖥️ = DSM web UI · 💻 = your PC terminal · 🐧 = NAS over SSH
@@ -73,6 +76,8 @@ sudo /volume1/scripts/m2-cache.sh verify      # → "OK: NVMe supported, writabl
   - **Triggered → Boot-up:** `/volume1/scripts/setup.sh`
   - **Scheduled → Daily** (optional): `/volume1/scripts/m2-cache.sh verify || /volume1/scripts/setup.sh`
 - **Control Panel → Hardware & Power → Fan Speed Mode → Cool.**
+- For the tested dual-PM983 active-airflow modification, see
+  [`guides/e10m20-t1-cooling.md`](guides/e10m20-t1-cooling.md).
 
 ---
 

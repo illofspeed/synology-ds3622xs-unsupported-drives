@@ -1,4 +1,55 @@
-# Synology DS3622xs+ — Unsupported Drives + M.2 Read-Write Cache
+# Synology DS3622xs+ — Full-Potential / Modding Guide
+
+Practical, owner-tested guides for taking a **Synology DS3622xs+** beyond its
+documented configuration: third-party drives and NVMe cache, **128 GB ECC RAM**,
+access to the hidden factory DIMMs, and direct cooling for an **E10M20-T1** with
+dual enterprise NVMe SSDs.
+
+## Guide index
+
+| Goal | Guide | Tested result |
+|---|---|---|
+| Use non-Synology HDDs and create a read-write cache on third-party NVMe | [Unsupported drives + M.2 read-write cache](#unsupported-drives--m2-read-write-cache) · [copy-paste runbook](INSTALL.md) | Working on DSM 7.4-90075 |
+| Replace the hidden factory DIMMs and reach 128 GB | [128 GB RAM upgrade, motherboard access and memory test](guides/128gb-ram-upgrade.md) | 128 GB detected; approximately 20-hour memory test passed |
+| Prevent dual PM983 SSDs from overheating during sustained benchmarks | [E10M20-T1 NVMe cooling](guides/e10m20-t1-cooling.md) | Sustained benchmarks stable after adding direct airflow |
+
+These guides describe one working machine, not an officially supported Synology
+configuration. Read the warnings in the relevant guide before making changes.
+
+## Tested full configuration
+
+| Area | Hardware / result |
+|---|---|
+| NAS | Synology DS3622xs+ |
+| Internal RAM slots | **2×32 GB OWC DDR4-2666 ECC SODIMM** (PC4-21300, CL19, 2Rx8, 260-pin, 1.2 V) replacing the factory 2×8 GB modules |
+| Accessible expansion RAM slots | **2×32 GB Kingston Server Premier KSM32SED8/32HC ECC SODIMM** |
+| Total memory | **128 GB ECC**, recognized by DSM |
+| Memory validation | Synology memory test passed; approximately **20 hours** |
+| PCIe card | Synology **E10M20-T1** with integrated 10GbE |
+| NVMe currently installed | **2× Samsung PM983 3.84 TB**, model **MZ-1LB3T80** |
+| Additional NVMe cooling | **Noctua NF-A12x15 FLX**, 120 × 120 × 15 mm, 3-pin, 12 V; custom female-to-female lead + Akyga AK-CA-12 and AK-CA-35 adapter chain |
+
+## Read this before choosing a guide
+
+- Back up important data and schedule downtime. Hardware work and root-level DSM
+  changes can cause data loss or an unbootable NAS if performed incorrectly.
+- Shut down and disconnect the NAS before opening it. Use ESD precautions.
+- Removing the motherboard to reach the factory DIMMs is much more invasive than
+  Synology's documented expansion-slot procedure and may affect warranty/support.
+- The drive/cache procedure modifies DSM compatibility data and runs third-party
+  scripts as root. DSM updates can change the behavior.
+- Keep all drives in their original numbered bay order during hardware work.
+
+## How the guides fit together
+
+The modifications are independent. You do **not** need the RAM or fan modification
+to use the unsupported-drive scripts, and the 128 GB upgrade does not require an
+E10M20-T1. They are collected here because they were validated on the same
+DS3622xs+ and together document the machine's full configuration.
+
+---
+
+## Unsupported drives + M.2 read-write cache
 
 A clean, repeatable path for running **non-Synology HDDs and M.2 NVMe SSDs** on a
 **DS3622xs+ (DSM 7.4)** — including a **read-write SSD cache** on third-party NVMe,
@@ -13,8 +64,9 @@ for whitelisting, and adds the missing operational pieces this specific job need
 - a **verify** check you can run from a scheduled task.
 
 > Tested on: **DS3622xs+**, DSM **7.4-90075**, 8× WD Ultrastar `WUH721818ALE6Lx` (18 TB),
-> with both 2× `Micron_7450_MTFDKBA960TFR` (960 GB) and 2× Samsung `MZ1LB3T8HMLA` /
-> PM983 (3.84 TB) on an **E10M20-T1** adapter card — including a full drive swap
+> with both 2× `Micron_7450_MTFDKBA960TFR` (960 GB) and 2× Samsung PM983 3.84 TB
+> (`MZ-1LB3T80`; DSM reports the longer `MZ1LB3T8HMLA` identifier) on an
+> **E10M20-T1** adapter card — including a full drive swap
 > between the two NVMe sets, re-validated end to end.
 > The approach generalizes to other models/drives, but the M.2 read-write-cache trick is
 > what makes this repo worth keeping.
@@ -54,6 +106,8 @@ right place:
 ---
 
 > 📋 Prefer a bare copy-paste runbook with PC/NAS/UI context tags? See [`INSTALL.md`](INSTALL.md).
+> 🔧 For the physical hardware guides, see [128 GB RAM](guides/128gb-ram-upgrade.md)
+> and [E10M20-T1 cooling](guides/e10m20-t1-cooling.md).
 > 🧠 Full project history, decisions, and current state: [`docs/PROJECT-CONTEXT.md`](docs/PROJECT-CONTEXT.md) · New dev machine: [`docs/DEV-SETUP.md`](docs/DEV-SETUP.md)
 
 ## TL;DR — the clean path
@@ -161,9 +215,10 @@ NVMe devices are auto-detected from `/sys/block/nvme*`.
   **ANSI color codes** in Task Scheduler output → pass `--email` (setup.sh does), and
   upstream ≥ v3.6.135 auto-detects scheduler runs. A healthy steady-state run shows all
   **"already exists / already enabled"**.
-- **Heat** → enterprise NVMe (e.g. Micron 7450) run hot on a passive M.2 card. Set
-  **Control Panel → Hardware & Power → Fan Speed Mode → Cool Mode** and add a heatsink. Check
-  temps with `synonvme --smart-info-get /dev/nvme0n1`.
+- **Heat** → enterprise NVMe can run hot on a passive M.2 card. Set **Control Panel →
+  Hardware & Power → Fan Speed Mode → Cool Mode**, add suitable heatsinks, and monitor
+  temperatures with `synonvme --smart-info-get /dev/nvme0n1`. For the tested dual-PM983
+  active-airflow modification, see [E10M20-T1 NVMe cooling](guides/e10m20-t1-cooling.md).
 
 ---
 
