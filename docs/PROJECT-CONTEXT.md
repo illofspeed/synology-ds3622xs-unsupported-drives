@@ -17,7 +17,7 @@ Personal values are placeholders — substitute your own (`<nas-ip>`, `<ssh-port
 | Pool/Volume | Storage Pool 1 = **RAID 6**, ~98 TB; Volume 1 = btrfs, **LUKS-encrypted** (`cryptvol_1`) |
 | M.2 | 2× **Samsung PM983 3.84 TB** (`MZ-1LB3T80`; DSM may expose a longer OEM identifier) on an **E10M20-T1** adapter card, PCI slot 1 (earlier: 2× Micron 7450 960 GB, since swapped out) |
 | Additional NVMe cooling | **Noctua NF-A12x15 FLX**, 120×120×15 mm, 3-pin, 12 V, positioned for direct airflow over the E10M20-T1 heatsinks |
-| Fan power | Custom female-to-female lead assembled from two donor leads → Akyga `AK-CA-12` P4/Molex adapter → Akyga `AK-CA-35` Molex/3-pin 12 V adapter → intermediate Noctua Low-Noise Adapter → fan; exact donor-lead product name still needed because the supplied order link is private |
+| Fan power | Custom female-to-female lead assembled from two donor leads → Akyga `AK-CA-12` P4/Molex adapter → Akyga `AK-CA-35` Molex/3-pin 12 V adapter → intermediate Noctua Low-Noise Adapter → fan; the exact donor-lead listing is unavailable because the supplied order link is account-private, so the harness is documented as a non-reproducible installation that requires independent pinout and voltage verification |
 | SSD cache | **Read-write**, RAID 1 (`md3` over `nvme0n1p1`+`nvme1n1p1`), "Pin all Btrfs metadata" enabled; ~98% hit rate |
 | NAS SSH | custom port (not 22); user-level login + `sudo -i` |
 | Scripts on NAS | `/volume1/scripts/{setup.sh, m2-cache.sh, syno_hdd_db.sh}` |
