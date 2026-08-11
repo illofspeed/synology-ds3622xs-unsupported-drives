@@ -16,9 +16,10 @@ E10M20-T1 carrying two enterprise NVMe SSDs in a DS3622xs+.
 | Additional fan | **Noctua NF-A12x15 FLX** |
 | Fan size | **120 × 120 × 15 mm** slim profile |
 | Fan connection | **3-pin, 12 V** |
+| P4 donor extensions | **2× Akyga AK-CA-78**, 23 cm, P4 male-to-female, modified |
 | P4/Molex adapter | **Akyga AK-CA-12**, 15 cm |
 | Molex/3-pin adapter | **Akyga AK-CA-35**, 15 cm |
-| Custom lead | Female-to-female lead assembled from two donor leads |
+| Custom lead | Female-to-female P4 lead assembled from the two modified AK-CA-78 cables |
 | Fan-speed adapter | Noctua intermediate Low-Noise Adapter; not the lowest-speed option |
 
 ![Top-down view of the Noctua NF-A12x15 FLX installed over the E10M20-T1 heatsinks](../images/e10m20-t1-cooling/noctua-over-e10m20-t1.jpeg)
@@ -92,21 +93,27 @@ these principles:
    returning the NAS to service.
 
 The overview photo documents the fan's position and visible cable-tie mounting.
-The first donor lead was supplied through an account-private Allegro purchase
-link, so its exact product name and a public product URL are unavailable. Treat
-the power-chain description as a record of this installation, not as a complete
-pinout or a directly reproducible wiring plan. Anyone building a similar harness
-must identify compatible connectors and independently verify every wire,
-continuity, voltage, and polarity.
+The donor cables were two [Akyga AK-CA-78 P4 4-pin 23 cm extension
+cables](https://allegro.pl/oferta/przedluzacz-zasilania-p4-4-pin-akyga-ak-ca-78-kabel-do-procesora-cpu-23cm-18681209197).
+The [manufacturer's specification](https://pl.akyga.com/produkty/1038-przedluzacz-p4-4-pin-23-cm-ak-ca-78.html)
+identifies each unmodified AK-CA-78 as a 23 cm cable with one P4 male and one P4
+female connector. Two were modified and joined to form the custom female-to-female
+P4 lead used in this installation; an unmodified AK-CA-78 is not female-to-female.
+Treat the power-chain description as a record of this installation, not as a
+complete pinout or a directly reproducible wiring plan. Anyone building a similar
+harness must independently verify every wire, continuity, voltage, and polarity.
 
 ## Fan power adapter chain
 
 The installed fan was not connected directly to an unidentified motherboard fan
 header. Its 3-pin, 12 V supply was assembled from the following parts:
 
-1. **Two donor leads** from the same Allegro product were joined to create a
-   female-to-female lead. The conductors were joined using soldered/secured wire
-   connections and insulated.
+1. **Two [Akyga AK-CA-78](https://allegro.pl/oferta/przedluzacz-zasilania-p4-4-pin-akyga-ak-ca-78-kabel-do-procesora-cpu-23cm-18681209197)
+   donor cables** were used. Each stock AK-CA-78 is a 23 cm P4 extension with one
+   male and one female connector. The two cables were modified and joined to
+   create a custom P4 female-to-female lead. The conductors were joined using
+   soldered/secured wire connections and insulated. The stock AK-CA-78 cannot be
+   used as a female-to-female lead without modification.
 2. [**Akyga AK-CA-12**](https://allegro.pl/oferta/kabel-molex-p4-4-pin-akyga-ak-ca-12-procesor-15cm-11449850255)
    — a 15 cm adapter with a male peripheral Molex connector and female P4 4-pin
    connector. The listing specifies 18 AWG conductors and a maximum load of 3 A
@@ -125,7 +132,7 @@ In simplified form, the intended chain is:
 
 ```text
 NAS power connection
-  → custom female-to-female lead
+  → custom female-to-female P4 lead (made from 2× modified Akyga AK-CA-78)
   → Akyga AK-CA-12 (P4 / Molex)
   → Akyga AK-CA-35 (Molex / 3-pin 12 V)
   → optional Noctua Low-Noise Adapter
@@ -157,9 +164,10 @@ lower limits still.
 6. Lay the Noctua NF-A12x15 FLX horizontally over the E10M20-T1 heatsink area as
    shown in the installation photo. Confirm the frame's airflow arrows point
    toward the heatsinks before securing it.
-7. Assemble and continuity-test the custom female-to-female lead and Akyga adapter
-   chain outside the NAS. Confirm the expected 12 V polarity at the final 3-pin
-   output before connecting the fan.
+7. Assemble and continuity-test the custom female-to-female P4 lead made from the
+   two modified AK-CA-78 cables and the remaining Akyga adapter chain outside the
+   NAS. Confirm the expected 12 V polarity at the final 3-pin output before
+   connecting the fan.
 8. Connect the fan directly for full speed or use the selected Noctua Low-Noise
    Adapter. Confirm that the fan starts reliably at the selected speed.
 9. Secure the complete harness and fan cable away from all fan blades, PCB edges,
