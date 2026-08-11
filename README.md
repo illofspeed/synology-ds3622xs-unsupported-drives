@@ -27,7 +27,7 @@ configuration. Read the warnings in the relevant guide before making changes.
 | Memory validation | Synology memory test passed; approximately **20 hours** |
 | PCIe card | Synology **E10M20-T1** with integrated 10GbE |
 | NVMe currently installed | **2× Samsung PM983 3.84 TB**, model **MZ-1LB3T80** |
-| Additional NVMe cooling | **Noctua NF-A12x15 FLX**, 120 × 120 × 15 mm, 3-pin, 12 V; custom female-to-female lead + Akyga AK-CA-12 and AK-CA-35 adapter chain |
+| Additional NVMe cooling | **Noctua NF-A12x15 FLX**, 120 × 120 × 15 mm, 3-pin, 12 V; custom female-to-female P4 lead made from **2× Akyga AK-CA-78** extensions + Akyga AK-CA-12 and AK-CA-35 adapter chain |
 
 ## Read this before choosing a guide
 
