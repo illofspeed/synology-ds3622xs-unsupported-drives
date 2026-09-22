@@ -233,6 +233,14 @@ A full DSM re-init is **not** needed and would destroy your volume.
 
 ---
 
+## Host-managed SMR drives (WD Ultrastar HC680 / HC670 / HC650)
+DSM cannot use **host-managed** SMR drives at all — the whitelist trick in this repo does not
+help, the drives reject normal random writes. They are the cheapest large drives per TB on the
+market because almost nothing can use them. [**zonedpool**](https://github.com/illofspeed/zonedpool)
+runs them on this same DS3622xs+: OpenMediaVault in a VMM guest, the drives on their own PCIe
+SATA card attached to the guest, and the pool used from DSM as a Hyper Backup target and as a
+File Station remote folder. Guide: [zonedpool/synology](https://github.com/illofspeed/zonedpool/tree/main/synology).
+
 ## Credits & License
 
 - Whitelisting engine: **[007revad/Synology_HDD_db](https://github.com/007revad/Synology_HDD_db)**
